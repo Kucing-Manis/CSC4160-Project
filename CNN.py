@@ -441,7 +441,7 @@ def initialize_parameters():
     parameters = {}
 
     # Initilalize the parameters of conv kernels
-    parameters['W' + str(1)] = np.random.randn(2, 2, 16) * np.sqrt(2/68)
+    parameters['W' + str(1)] = np.random.randn(2, 2, 16) * np.sqrt(2/64)
     parameters['b' + str(1)] = np.zeros((1, 1, 1, 16))
 
 
@@ -489,7 +489,7 @@ x_train_subset = x_train[:1000]
 x_test_subset = x_test[:100]
 y_train_subset = y_train[:1000]
 y_test_subset = y_test[:100]
-para, cost = train_cnn(x_train_subset, y_train_subset, x_test_subset, y_test_subset, parameters, learning_rate=0.001, num_epochs=25, batch_size=128)    
+para, cost = train_cnn(x_train_subset, y_train_subset, x_test_subset, y_test_subset, parameters, learning_rate=0.001, num_epochs=20, batch_size=128)    
 
 end_time = time.time()
 
