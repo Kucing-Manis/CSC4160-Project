@@ -31,6 +31,7 @@ Create test scenarios that mimic real-world applications to assess instance perf
 1. Measure time, computation, and memory performance across different EC2 instance types.
 2. Collect information on benchmark tests, including CPU utilization, memory usage, execution time, cost (USD/hour), and consumption-based pricing.
 3. Analyze the consumption-based pricing of T3.large, R6i.large, C6id.large, and Z1d.large instance types.
+
 **IV. Procedure**
 1. Launch EC2 Instances
   - Deploy instances (T3.large, C6i.large, R6i.large, Z1d.large) in the US East (North Virginia) region.
@@ -43,7 +44,7 @@ Create test scenarios that mimic real-world applications to assess instance perf
 
 **V. Data Result**
 
-![](results/table.png)
+![](results/graphs/table.png)
 
 **VI. Analysis**
 
@@ -53,9 +54,9 @@ This report focuses on the performance of CPU and memory from using Sysbench too
 - **Memory Performance**: How fast memory can be read and written
 - **Execution Time:** Total runtime of the code
 - **Cost:** The cost to run the AWS EC2 instance in terms of USD per hour
-- **Consumption-Based Pricing:** The cost is based on how long the execution time of the code is!
+- **Consumption-Based Pricing:** The cost is based on how long the execution time of the code is
 
-[](results/graphs/graph_1.png)
+![](results/graphs/graph_1.png)
 
 ![](results/graphs/graph_2.png)
 
