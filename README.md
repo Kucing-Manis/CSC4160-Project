@@ -34,13 +34,40 @@ Create test scenarios that mimic real-world applications to assess instance perf
 
 **IV. Procedure**
 1. Launch EC2 Instances
-  - Deploy instances (T3.large, C6i.large, R6i.large, Z1d.large) in the US East (North Virginia) region.
-2. Install necessary software and prepare benchmarking
-  - Set up the system by creating a Python virtual environment and installing sysbench.
+   1.1 Region: US East (North Virginia)
+   1.2 Use Amazon Machine Image:
+     Ubuntu Server 24.04 LTS (HVM), EBS General Purpose (SSD) Volume Type
+   1.3 Key pair (login) Security Group: All traffic
+   1.4 Configure Storage: gp3
+2. Install necessary software and set up benchmarking task
+   2.1 Update the system:
+     $sudo apt update && sudo apt upgrade -y
+   2.2 Install Python 3:
+     $sudo apt install -y git python3 python3-pip python3-dev python3-virtualenv
+   2.3 Create virtual environment:
+     $virtualenv ml_env
+   2.4 Activate the virtual environment: 		Deactivate when finished:
+     $source ml_env/bin/activate 		$deactivate
+   2.5 Install Sysbench:
+     $sudo apt install sysbench
 3. Run ML Workloads
-  - Transfer Python code to the EC2 instance using the terminal and execute the code directly on the instance
+   3.1 Upload data for testing and training to EC2 from the computer’s terminal using the command:
+     Pre-requisite: $sudo apt install unzip
+     $scp -i /path/to/your-key.pem /path/to/data.zip ubuntu@<public-ip-of-instance>:/home/ubuntu/
+     Then $unzip Data_project.zip
+   3.2 Upload Python code script to EC2 from the computer’s terminal using the command:
+     $scp -i /path/to/your-key.pem /path/to/MLCode.py ubuntu@<public-ip-of-instance>:/home/ubuntu/
+     Alternatively: $nano MLCode.py
+   3.3 Ensure that the directory is where the script is located and run the Python code script on the EC2 instance:
+     $python3 /home/ubuntu/MLCode.py
 4. Monitor and Collect Results
-  - Use sysbench to evaluate system performances such as CPU, memory usage, and bandwidth metrics.
+   4.1 Using Sysbench:
+     4.1.1 Measure CPU (and indirectly CPU utilization):
+       $sysbench cpu --cpu-max-prime=20000 run
+     4.1.2 Memory Usage and Bandwidth:
+       $sysbench memory --memory-block-size=1M --memory-total-size=10G run
+       This command will test memory bandwidth by reading/writing blocks of data. You can adjust the block size and total size depending on your needs.
+   4.2 Deactivate Virtual environment: $deactivate
 
 **V. Data Result**
 
